@@ -2,10 +2,6 @@
 
 Rating service has been developed on NodeJS
 
-# Bookinfo Rating Service
-
-Rating service has been developed on NodeJS
-
 ## License
 
 MIT License
