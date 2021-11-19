@@ -49,7 +49,7 @@ jobs:
               }
             }
   check_health:
-    need: deploy
+    needs: deploy
     runs-on: ubuntu-20.04
     steps:
       - name: curl_url
