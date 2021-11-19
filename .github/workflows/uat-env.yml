@@ -48,3 +48,16 @@ jobs:
                 "COMMIT_SHA": "${{ github.sha }}"
               }
             }
+    check_health:
+      need: deploy
+      runs-on: ubuntu-20.04
+      steps:
+        - name: curl_url
+          run: curl http://sitkmutt.bookinfo.dev.opsta.net/student10/ratings/health | grep "Ratings is good"
+        - name: checking
+          run: |
+            if echo $? == 0; then
+              echo ":)"
+            else
+              echo ":("
+            fi
