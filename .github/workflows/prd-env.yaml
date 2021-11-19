@@ -1,4 +1,4 @@
-name: uat-env
+name: prd-env
 on:
   pull_request:
     branches:
@@ -18,7 +18,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/first-unknow/bookinfo-ratings:uat
+          tags: ghcr.io/first-unknow/bookinfo-ratings:prd
   deploy:
     needs: build
     runs-on: ubuntu-20.04
@@ -35,10 +35,10 @@ jobs:
         uses: deliverybot/helm@v1
         with:
           helm: helm3
-          release: bookinfo-uat-ratings
-          namespace: student10-bookinfo-uat
+          release: bookinfo-prd-ratings
+          namespace: student10-bookinfo-prd
           chart: k8s/helm
-          value-files: k8s/helm-values/values-bookinfo-uat-ratings.yaml
+          value-files: k8s/helm-values/values-bookinfo-prd-ratings.yaml
           values: |
             {
               "extraEnv": {
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: curl_url
-        run: curl http://sitkmutt.bookinfo.uat.opsta.net/student10/ratings/health | grep "Ratings is good"
+        run: curl http://sitkmutt.bookinfo.opsta.net/student10/ratings/health | grep "Ratings is good"
       - name: checking
         run: |
           if echo $? == 0; then
